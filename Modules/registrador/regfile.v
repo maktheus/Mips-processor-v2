@@ -1,3 +1,5 @@
+`include "../../../config/definitions.vh"
+
 module regfile (input clk,
     input we3,
     input [`RA_LEN] ra1, ra2, wa3,
