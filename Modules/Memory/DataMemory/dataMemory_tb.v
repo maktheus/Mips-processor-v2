@@ -1,11 +1,13 @@
+`include "../../../config/config.v"
+
 `timescale 1ns / 1ps
 
 module dataMemory_tb;
 
 // Inputs
 reg clk, we;
-reg [31:0] a, wd;
-wire [31:0] rd;
+reg [`WORD_LEN-1:0] a, wd;
+wire [`WORD_LEN-1:0] rd;
 
 // Instantiate the Unit Under Test (UUT)
 dataMemory uut (
@@ -24,8 +26,8 @@ initial begin
     wd = 0;
 
     // Start VCD dump
-    $dumpfile("regfile_tb.vcd");
-    $dumpvars(0, regfile_tb);
+    $dumpfile("dataMemory_tb.vcd");
+    $dumpvars(0, dataMemory_tb);
 
     // Wait for global reset
     #100;

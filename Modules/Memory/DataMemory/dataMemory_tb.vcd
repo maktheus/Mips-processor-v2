@@ -1,0 +1,95 @@
+$date
+	Sat Feb  3 23:08:42 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module dataMemory_tb $end
+$var wire 32 ! rd [31:0] $end
+$var reg 32 " a [31:0] $end
+$var reg 1 # clk $end
+$var reg 32 $ wd [31:0] $end
+$var reg 1 % we $end
+$scope module uut $end
+$var wire 32 & a [31:0] $end
+$var wire 1 # clk $end
+$var wire 32 ' rd [31:0] $end
+$var wire 32 ( wd [31:0] $end
+$var wire 1 % we $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 (
+bx '
+b0 &
+0%
+b0 $
+0#
+b0 "
+bx !
+$end
+#5000
+1#
+#10000
+0#
+#15000
+1#
+#20000
+0#
+#25000
+1#
+#30000
+0#
+#35000
+1#
+#40000
+0#
+#45000
+1#
+#50000
+0#
+#55000
+1#
+#60000
+0#
+#65000
+1#
+#70000
+0#
+#75000
+1#
+#80000
+0#
+#85000
+1#
+#90000
+0#
+#95000
+1#
+#100000
+0#
+b11011110101011011011111011101111 $
+b11011110101011011011111011101111 (
+b100 "
+b100 &
+1%
+#105000
+b11011110101011011011111011101111 !
+b11011110101011011011111011101111 '
+1#
+#110000
+0#
+0%
+#115000
+1#
+#120000
+0#
+#125000
+1#
+#130000
+0#
