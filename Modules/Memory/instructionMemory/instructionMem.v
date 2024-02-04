@@ -1,12 +1,16 @@
 `include "../../../config/config.v"
 
-module imem(input logic [5:0] a,
-output logic [WORD_LEN:0] rd);
-logic [WORD_LEN:0] RAM[RAM_DEPTH:0];
+module instructionMemory(input  [`MEMORY_ADDR_LEN-1:0] a,
+output  [`WORD_LEN-1:0] rd);
+
+reg [`WORD_LEN-1:0] RAM[`RAM_DEPTH-1:0];
 
     initial
     //read file and store in RAM
-    $readmemh("memfile.dat", RAM);
+    begin
+        $readmemh("../../../memfile.dat", RAM);
+    end
+    
     assign rd = RAM[a]; // word aligned
 
 endmodule
