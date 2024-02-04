@@ -1,15 +1,17 @@
-`include "../../../define.v"
+`include "../../../config/config.v"
 
-module dataMemmory(
-input logic clk, we,
-input logic [WORD_LEN:0] a, wd,
-output logic [WORD_LEN:0] rd
+module dataMemory(
+input  clk, we,
+input  [`WORD_LEN-1:0] a, wd,
+output  [`WORD_LEN-1:0] rd
 );
 
-    logic [WORD_LEN:0] RAM[RAM_DEPTH:0];
-    assign rd = RAM[a[WORD_LEN:2]]; 
+    reg [`WORD_LEN-1:0] RAM[`RAM_DEPTH-1:0];
     
-    always_ff @(posedge clk)
-        if (we) RAM[a[WORD_LEN:2]] <= wd;
+    assign rd = RAM[a[`WORD_LEN-1:2]]; 
+
+    always @(posedge clk)
+        if (we) RAM[a[`WORD_LEN-1:2]] <= wd;
 
 endmodule
+
