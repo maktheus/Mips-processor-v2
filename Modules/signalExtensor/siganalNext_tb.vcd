@@ -1,0 +1,33 @@
+$date
+	Thu Feb  8 23:36:15 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module siganalNext_tb $end
+$var wire 32 ! outputSignalAfterExtension [31:0] $end
+$var reg 16 " inputSignalBeforeExtension [15:0] $end
+$scope module uut $end
+$var wire 2 # inputSignalBeforeExtension [-1:0] $end
+$var wire 2 $ outputSignalAfterExtension [-1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 $
+b0 #
+b0 "
+b0 !
+$end
+#10000
+b1000000000000000 "
+#20000
+b11 !
+b11 $
+b11 #
+b111111111111111 "
+#40000

@@ -14,8 +14,12 @@ siganalNext uut (
 );
 
 initial begin
+
     // Inicialização
     inputSignalBeforeExtension = 0;
+    
+    $dumpfile("siganalNext_tb.vcd");
+    $dumpvars(0, siganalNext_tb);
 
     // Aplicação de estímulos
     #10 inputSignalBeforeExtension = 16'h8000; // Teste com bit MSB = 1
