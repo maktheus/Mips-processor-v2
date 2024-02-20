@@ -1,56 +1,81 @@
-`include "../../config/config.v"
 `timescale 1ns / 1ps
 
-module shift_register_tb;
+module shiftreg_tb;
 
-// Parâmetros do Test Bench
-reg clk;
-reg reset;
-reg [7:0] data_in;
-reg shift_en;
-wire [7:0] data_out;
+    // Parâmetros do Testbench
+    parameter N = `SHIFT_LEN; 
+    parameter CLK_PERIOD = 10; // Período do clock em ns
 
-// Instanciação do módulo do registrador de deslocamento
-// Substitua "shift_register" pelo nome real do seu módulo
-shift_register uut (
-    .clk(clk),
-    .reset(reset),
-    .data_in(data_in),
-    .shift_en(shift_en),
-    .data_out(data_out)
-);
+    // Entradas
+    reg clk;
+    reg reset;
+    reg load;
+    reg sin;
+    reg [N-1:0] data_in;
 
-// Geração de clock para simulação
-always #10 clk = ~clk;
+    // Saídas
+    wire [N-1:0] data_out;
+    wire sout;
 
-// Inicialização e simulação de cenários de teste
-initial begin
-    // Inicializa o clock e o reset
-    clk = 0;
-    reset = 1;
-    shift_en = 0;
-    data_in = 8'b00000000;
+    // Variáveis do Testbench
+    reg [N-1:0] expected_data_out; // Declarada aqui para uso no bloco initial
 
-    // Reset do sistema
-    #20;
-    reset = 0;
-    
-    // Teste 1: Deslocamento com o enable desativado
-    #20;
-    data_in = 8'b10101010;
-    shift_en = 0;
-    
-    // Teste 2: Ativa o deslocamento
-    #20;
-    shift_en = 1;
-    
-    // Teste 3: Continua o deslocamento com novos dados
-    #40;
-    data_in = 8'b11001100;
-    
-    // Conclusão dos testes
-    #100;
-    $finish;
-end
+    // Instância do módulo a ser testado
+    shiftreg #(.N(N)) uut (
+        .clk(clk),
+        .reset(reset),
+        .load(load),
+        .sin(sin),
+        .data_in(data_in),
+        .data_out(data_out),
+        .sout(sout)
+    );
+
+    // Geração de clock
+    always #(CLK_PERIOD/2) clk = ~clk;
+
+    // Procedimento inicial
+    initial begin
+        // Inicialização
+        clk = 0;
+        reset = 1;
+        load = 0;
+        sin = 0;
+        data_in = 0;
+               $dumpfile("shiftreg_tb.vcd");
+        $dumpvars(0, shiftreg_tb);
+        // Reset do sistema
+        #20;
+        reset = 0;
+
+        // Teste de carga de dados
+        #10;
+        load = 1;
+        data_in = 8'b10101010; // Exemplo de padrão de dados
+        #10;
+        load = 0;
+
+        // print data_out
+        $display("data_out = %b", data_out);
+
+        // Teste de deslocamento com sin = 1
+        #20;
+        sin = 1;
+        #10;
+        sin = 0;
+        // print data_out
+        $display("data_out = %b", data_out);
+
+        // Mais ciclos de clock para observação
+        #100;
+
+        // Preparação do valor esperado
+        expected_data_out = {data_in[N-2:0], 1'b1}; // Prepara o valor esperado antes da verificação
+
+
+
+        // Finaliza a simulação
+        $finish;
+    end
 
 endmodule

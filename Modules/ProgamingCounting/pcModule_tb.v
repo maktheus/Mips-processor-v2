@@ -1,4 +1,4 @@
-`include "../../../config/config.v"
+`include "../../config/config.v"
 `timescale 1ns / 1ps
 
 module ProgramCounter_tb;
@@ -7,10 +7,10 @@ module ProgramCounter_tb;
 reg clk;
 reg reset;
 reg enable;
-reg [31:0] newPC;
+reg [`WORD_LEN-1:0] newPC;
 
 // Output
-wire [31:0] PC;
+wire [`WORD_LEN-1:0] PC;
 
 // Instantiate the Unit Under Test (UUT)
 ProgramCounter uut (
@@ -33,6 +33,9 @@ initial begin
     reset = 1;
     enable = 0;
     newPC = 0;
+
+    $dumpfile("ProgramCounter_tb.vcd");
+    $dumpvars(0, ProgramCounter_tb);
 
     // Wait 100 ns for global reset to finish
     #100;
